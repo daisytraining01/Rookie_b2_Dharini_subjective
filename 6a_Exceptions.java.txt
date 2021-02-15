@@ -1,0 +1,90 @@
+EXCEPTION 1
+package subjective;
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import org.openqa.selenium.TimeoutException
+import com.kms.katalon.core.logging.KeywordLogger
+import com.kms.katalon.core.util.KeywordUtil
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+public class  Exception{
+	public static void main(String[] args){
+ 
+ 
+try{
+WebUI.click(findTestObject("Page_Register/btn_register"))
+ 
+}catch (TimeoutException toe) {
+WebUI.waitForElementClickable(findTestObject("Page_Register/btn_register"), 20)
+WebUI.click(findTestObject("Page_Register/btn_register"))
+ 
+}catch (Exception e) {
+KeywordUtil.markError("Register button is not found.")
+ 
+throw(e);
+ 
+}
+EXCEPTION 2
+package subjective;
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import org.openqa.selenium.WebDriver
+import com.kms.katalon.core.webui.common.WebUiCommonHelper
+public class  Exception{
+	public static void main(String[] args){
+ 
+ 
+boolean verifyObjectPresent() {
+try {
+WebUiCommonHelper.findWebElement(findTestObject("Page_Report/lblReport"), 20)
+return true;
+} catch (Exception e) {
+return false;
+}
+}
+EXCEPTION 3
+public class ScreenshotTestRule implements TestRule {
+
+WebDriver driver;
+
+public ScreenshotTestRule (WebDriver driver) {
+this.driver = driver;
+}
+
+public Statement apply(final Statement statement, final Description description) {
+
+return new Statement() {
+@Override
+public void evaluate() throws Throwable {
+try {
+statement.evaluate();
+}
+catch (Throwable t) {
+String methodName = getName(description.getMethodName());
+Screenshot screenshot = new Screenshot(methodName);
+screenshot.capture(methodName);
+throw t;
+}
+}
+};
+}
+}
+EXCEPTION 4
+public static Boolean IsElementPresent2()
+{
+try
+{
+
+WebElement element1= driver.findElement(By.xpath("//*[@id='element1']"));
+
+if(driver.findElements(By.xpath("//*[@id='element1']")).size() != 0)
+{
+
+System.out.println("------------------Element Present----------------------------------------------------");
+}
+return true;
+}
+catch (Exception e)
+{
+System.out.println("Exception occured Element Not found occured"+e);
+return false;
+
+}
+}
